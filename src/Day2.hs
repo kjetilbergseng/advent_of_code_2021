@@ -3,12 +3,10 @@ module Day2 where
 import Control.Monad (join)
 import Data.Function ((&))
 
-toInt x = read x :: Int
-
 positionChange (str, int)
-  | str == "forward" = (toInt int, 0)
-  | str == "up" = (0, - toInt int)
-  | str == "down" = (0, toInt int)
+  | str == "forward" = (read int, 0)
+  | str == "up" = (0, - read int)
+  | str == "down" = (0, read int)
   | otherwise = (0, 0)
 
 pairSum (a, b) (c, d) = (a + c, b + d)
