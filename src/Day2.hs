@@ -13,9 +13,7 @@ positionChange (str, int)
 
 pairSum (a, b) (c, d) = (a + c, b + d)
 
-aim (a, b, c) (d, e, _) = (a + d, b + d * c, c + e)
-
-pairToTriple (a, b) = (a, b, 0)
+aim (a, b, c) (d, e) = (a + d, b + d * c, c + e)
 
 tripleToPair (a, b, _) = (a, b)
 
@@ -25,7 +23,7 @@ day2a li = uncurry (*) (mapReduce positionChange pairSum (0, 0) li)
 
 day2b li =
   li
-    & mapReduce (pairToTriple . positionChange) aim (0, 0, 0)
+    & mapReduce positionChange aim (0, 0, 0)
     & tripleToPair
     & uncurry (*)
 
