@@ -7,15 +7,15 @@ import GHC.Generics (Generic (to))
 transpose :: [[a]] -> [[a]]
 transpose = getZipList . traverse ZipList
 
-mostRpeated li
+mostRepeated li
   | 2 * length (filter (== '0') li) > length li = 0
   | otherwise = 1
 
-mostRpeatedChar li
+mostRepeatedChar li
   | 2 * length (filter (== '0') li) > length li = '0'
   | otherwise = '1'
 
-gamma li = map mostRpeated (transpose li)
+gamma li = map mostRepeated (transpose li)
 
 epsilon :: [Int] -> [Int]
 epsilon = map (xor 1)
@@ -26,7 +26,7 @@ compareEqual i l1 l2 = l1 !! i == l2 !! i
 
 compareNotEqual i l1 l2 = not (compareEqual i l1 l2)
 
-mapMostRepeated li = map mostRpeatedChar (transpose li)
+mapMostRepeated li = map mostRepeatedChar (transpose li)
 
 filterMostrepeated iter compareFn li = filter (compareFn iter (mapMostRepeated li)) li
 
