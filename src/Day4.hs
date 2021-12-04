@@ -1,7 +1,6 @@
 {-# LANGUAGE ParallelListComp #-}
 
 module Day4 where
-import Control.Applicative
 import Data.List ( transpose )
 import Control.Monad (join)
 
@@ -13,7 +12,6 @@ split sep ls
     | null ls = []
     | otherwise = takeWhile (/= sep) ls:split sep (drop 1 (dropWhile (/= sep) ls))
 
-splitOn :: Char -> [[Char]] -> [[Char]]
 splitOn sep = concatMap (split sep)
 
 mask boards numbers=[[[number `elem` numbers | number<-row] | row <-board] | board <- boards]
@@ -22,13 +20,11 @@ getBoard boards mask = filter (/=[]) [[board | row<-m, and row ] | board <- boar
 
 flattenBoard board= join $ head $ head board
 
-bingo :: Int -> [[[[Char]]]] -> [[Char]] -> ([[Char]], Int)
 bingo i boards numbers
     | board /= [] = (flattenBoard board, i)
     | otherwise = bingo (i+1) boards numbers
     where board = getBoard boards (mask boards (take i numbers))   
 
-day4a :: [[[[Char]]]] -> [[Char]] -> ([[Char]], Int)
 day4a boards numbers
     | snd row < snd col = row 
     | otherwise = col
