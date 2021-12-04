@@ -2,10 +2,7 @@ module Day3 where
 
 import Control.Applicative
 import Data.Bits (xor)
-import GHC.Generics (Generic (to))
-
-transpose :: [[a]] -> [[a]]
-transpose = getZipList . traverse ZipList
+import Data.List ( transpose )
 
 mostRepeated li
   | 2 * length (filter (== '0') li) > length li = 0
