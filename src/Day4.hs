@@ -10,7 +10,7 @@ splitIntoBlocksOf n ls
 
 split sep ls
     | null ls = []
-    | otherwise = takeWhile (/= sep) ls:split sep (drop 1 (dropWhile (/= sep) ls))
+    | otherwise = takeWhile (/= sep) ls:split sep (drop 1 $ dropWhile (/= sep) ls)
 
 splitOn sep = concatMap (split sep)
 
@@ -23,15 +23,17 @@ flattenBoard board= join $ head $ head board
 bingo i boards numbers
     | board /= [] = (flattenBoard board, i)
     | otherwise = bingo (i+1) boards numbers
-    where board = getBoard boards (mask boards (take i numbers))   
+    where board = getBoard boards $ mask boards (take i numbers)   
 
 day4a boards numbers
     | snd row < snd col = row 
     | otherwise = col
     where row = bingo 1 boards numbers 
-          col = bingo 1 (map transpose boards) numbers 
+          col = bingo 1 (map transpose boards) numbers
 
-calculateDay4Solution board numbers = read (last (take (snd board) numbers)) * sum (map read (remainingNumbers (fst board) (take (snd board) numbers))) 
+getNthNumber n numbers= read $ last (take n numbers)
+getSumOfRemaining board numbers = sum $ map read $ remainingNumbers (fst board) $ take (snd board) numbers
+calculateDay4Solution board numbers = getNthNumber (snd board) numbers * getSumOfRemaining board numbers
 
 day4b boards numbers = foldl1 (getLastBoard numbers) [day4a [board] numbers | board <- boards]
 
