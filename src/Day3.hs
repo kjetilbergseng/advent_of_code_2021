@@ -5,25 +5,21 @@ import Data.Bits (xor)
 import Data.List ( transpose )
 
 mostRepeated li
-  | 2 * length (filter (== '0') li) > length li = 0
-  | otherwise = 1
-
-mostRepeatedChar li
   | 2 * length (filter (== '0') li) > length li = '0'
   | otherwise = '1'
 
-gamma li = map mostRepeated (transpose li)
+gamma li = map (charBitToInt . mostRepeated) (transpose li)
 
-epsilon :: [Int] -> [Int]
 epsilon = map (xor 1)
 
+toDecimal :: Num a => [a] -> a
 toDecimal li = sum $ zipWith (\x y -> 2 ^ x * y) [0 .. length li] (reverse li)
 
 compareEqual i l1 l2 = l1 !! i == l2 !! i
 
 compareNotEqual i l1 l2 = not (compareEqual i l1 l2)
 
-mapMostRepeated li = map mostRepeatedChar (transpose li)
+mapMostRepeated li = map mostRepeated (transpose li)
 
 filterMostrepeated iter compareFn li = filter (compareFn iter (mapMostRepeated li)) li
 

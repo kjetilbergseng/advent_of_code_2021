@@ -1,64 +1,56 @@
 {-# LANGUAGE ParallelListComp #-}
 
 module Day4 where
-import Data.List ( transpose )
+import Data.List (transpose)
 import Control.Monad (join)
+import UtilityFunctions (split)
 
-splitIntoBlocksOf n ls
-    | n <= 0 ||null ls = []
-    | otherwise = take n ls:splitIntoBlocksOf n (drop n ls)
-
-split sep ls
-    | null ls = []
-    | otherwise = takeWhile (/= sep) ls:split sep (drop 1 $ dropWhile (/= sep) ls)
-
-splitOn sep = concatMap (split sep)
+data Result = Result { board :: [String]
+                     , pickNumber :: Int
+                     } deriving Show
 
 mask boards numbers=[[[number `elem` numbers | number<-row] | row <-board] | board <- boards]
 
-getBoard boards mask = filter (/=[]) [[board | row<-m, and row ] | board <- boards | m<-mask]
+getBoard boards mask = filter (/=[]) [[board | rowMask<-boardMask, and rowMask ] | board <- boards | boardMask<-mask]
 
 flattenBoard board= join $ head $ head board
 
 bingo i boards numbers
-    | board /= [] = (flattenBoard board, i)
+    | board /= [] = Result (flattenBoard board) i
     | otherwise = bingo (i+1) boards numbers
     where board = getBoard boards $ mask boards (take i numbers)   
 
-day4a boards numbers
-    | snd row < snd col = row 
+remainingNumbers board numbers=[number | number <- board, number `notElem` numbers]
+
+getNthNumber n numbers= read $ last (take n numbers)
+
+getSumOfRemaining result numbers = 
+    sum 
+    $ map read 
+    $ remainingNumbers (board result) 
+    $ take (pickNumber result) numbers
+
+calculateScore result numbers = getNthNumber (pickNumber result) numbers * getSumOfRemaining result numbers
+
+findWinner boards numbers
+    | pickNumber row < pickNumber col = row 
     | otherwise = col
     where row = bingo 1 boards numbers 
           col = bingo 1 (map transpose boards) numbers
 
-getNthNumber n numbers= read $ last (take n numbers)
-getSumOfRemaining board numbers = sum $ map read $ remainingNumbers (fst board) $ take (snd board) numbers
-calculateDay4Solution board numbers = getNthNumber (snd board) numbers * getSumOfRemaining board numbers
+findLooser boards numbers = foldl1 (getLooser numbers) [findWinner [board] numbers | board <- boards]
 
-day4b boards numbers = foldl1 (getLastBoard numbers) [day4a [board] numbers | board <- boards]
-
-remainingNumbers board numbers=[number | number <- board, number `notElem` numbers]
-
-getLastBoard numbers board1 board2 
-    | snd board1  > snd board2 = board1
-    | otherwise = board2
+getLooser numbers result1 result2 
+    | pickNumber result1  > pickNumber result2 = result1
+    | otherwise = result2
 
 day4 = do
   putStrLn "day4"
   contents <- readFile "../input/day4.txt"
   let input = lines contents
-  let numbers = splitOn ',' $ takeWhile (/= "") input
-  let boards = do {
-      map (splitIntoBlocksOf 5 . filter (/="") . splitOn ' ') 
-      $ splitIntoBlocksOf 5 
-      $ filter (/= "") 
-      $ dropWhile (/= "") 
-      input
-  }
-  let winningBoard = day4a boards numbers
-  let loosingBoard = day4b boards numbers
-  print (calculateDay4Solution winningBoard numbers)
-  print (calculateDay4Solution loosingBoard numbers)
- 
-  
-
+  let numbers = split ',' (head input)
+  let boards =  tail $ map (map words) $ split "" input
+  let winningBoard = findWinner boards numbers
+  let loosingBoard = findLooser boards numbers
+  print (calculateScore winningBoard numbers)
+  print (calculateScore loosingBoard numbers)

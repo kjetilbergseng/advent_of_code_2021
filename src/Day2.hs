@@ -2,6 +2,7 @@ module Day2 where
 
 import Control.Monad (join)
 import Data.Function ((&))
+import UtilityFunctions (mapReduce)
 
 positionChange (str, int)
   | str == "forward" = (read int, 0)
@@ -15,15 +16,13 @@ aim (a, b, c) (d, e) = (a + d, b + d * c, c + e)
 
 tripleToPair (a, b, _) = (a, b)
 
-mapReduce transform reduce init li = foldl reduce init (map transform li)
-
 day2a li = uncurry (*) (mapReduce positionChange pairSum (0, 0) li)
 
 day2b li =
-  li
-    & mapReduce positionChange aim (0, 0, 0)
-    & tripleToPair
-    & uncurry (*)
+  li & 
+  mapReduce positionChange aim (0, 0, 0) & 
+  tripleToPair & 
+  uncurry (*)
 
 day2 = do
   putStrLn "day2"

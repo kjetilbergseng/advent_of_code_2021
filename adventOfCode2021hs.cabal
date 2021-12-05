@@ -29,12 +29,15 @@ library
       Day2
       Day3
       Day4
+      Day5
+      UtilityFunctions
   other-modules:
       Paths_adventOfCode2021hs
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , containers
   default-language: Haskell2010
 
 executable adventOfCode2021hs-exe
@@ -47,6 +50,7 @@ executable adventOfCode2021hs-exe
   build-depends:
       adventOfCode2021hs
     , base >=4.7 && <5
+    , containers
   default-language: Haskell2010
 
 test-suite adventOfCode2021hs-test
@@ -60,4 +64,5 @@ test-suite adventOfCode2021hs-test
   build-depends:
       adventOfCode2021hs
     , base >=4.7 && <5
+    , containers
   default-language: Haskell2010
