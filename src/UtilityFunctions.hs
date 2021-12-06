@@ -11,3 +11,8 @@ split sep ls
 splitOn sep = concatMap (split sep)
 
 mapReduce transform reduce init li = foldl reduce init (map transform li)
+
+readInt x =  read x :: Int
+readInteger x =  read x :: Integer
+
+rotate = drop <> take

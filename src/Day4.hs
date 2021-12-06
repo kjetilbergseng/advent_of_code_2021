@@ -11,14 +11,14 @@ data Result = Result { board :: [String]
 
 mask boards numbers=[[[number `elem` numbers | number<-row] | row <-board] | board <- boards]
 
-getBoard boards mask = filter (/=[]) [[board | rowMask<-boardMask, and rowMask ] | board <- boards | boardMask<-mask]
+checkForWinningBoard boards mask = filter (/=[]) [[board | rowMask<-boardMask, and rowMask ] | board <- boards | boardMask<-mask]
 
 flattenBoard board= join $ head $ head board
 
 bingo i boards numbers
     | board /= [] = Result (flattenBoard board) i
     | otherwise = bingo (i+1) boards numbers
-    where board = getBoard boards $ mask boards (take i numbers)   
+    where board = checkForWinningBoard boards $ mask boards (take i numbers)   
 
 remainingNumbers board numbers=[number | number <- board, number `notElem` numbers]
 
