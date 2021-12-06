@@ -1,6 +1,5 @@
 module Day6 where
 import UtilityFunctions
-import Control.Monad (join)
 
 countFish days list
     | days==0 = list
