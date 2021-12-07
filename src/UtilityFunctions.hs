@@ -16,3 +16,7 @@ readInt x =  read x :: Int
 readInteger x =  read x :: Integer
 
 rotate = drop <> take
+
+replace n val li= take n li <> [val] <> drop (n+1) li
+
+transformElement n fn li = take n li <> [fn (li !! n)] <> drop (n+1) li

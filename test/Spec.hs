@@ -1,6 +1,6 @@
 import Day1
 import Day2
-import Day5
+
 
 main :: IO ()
 main = do
@@ -13,7 +13,5 @@ main = do
 
   putStrLn $ if day2a day2Inp == 150 then "Day 2a OK" else "Failed day2a!"
   putStrLn $ if day2b day2Inp == 900 then "Day 2b OK" else "Failed day2b!"
-
-  day5
   
   return ()
