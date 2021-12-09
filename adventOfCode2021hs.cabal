@@ -33,6 +33,7 @@ library
       Day6
       Day7
       Day8
+      Day9
       UtilityFunctions
   other-modules:
       Paths_adventOfCode2021hs
