@@ -31,22 +31,22 @@ checkNumber li numString num
   | sort (functionByNumber num li) == sort numString = Just num
   | otherwise = Nothing
 
-toDigit input str = head [x | x <- [0 .. 9], checkNumber input str x == Just x]
+toDigit signalPattern str = head [x | x <- [0 .. 9], checkNumber signalPattern str x == Just x]
 
-toNumber input output = toDecimal $ map (toDigit input) output
+toNumber signalPattern output = toDecimal $ map (toDigit signalPattern) output
 
 toDecimal li = sum $ zipWith (\x y -> 10 ^ x * y) [0 .. length li] (reverse li)
 
-day8a outputs = length $ filter (\x -> x == 2 || x == 3 || x == 4 || x == 7) (map length (join outputs))
+day8a outputs = length $ filter (\x -> x == 2 || x == 3 || x == 4 || x == 7) $ map length (join outputs)
 
-day8b inputs outputs = sum $ zipWith toNumber inputs outputs
+day8b signalPatterns outputs = sum $ zipWith toNumber signalPatterns outputs
 
 day8 = do
   putStrLn "day8"
   contents <- readFile "../input/day8.txt"
 
-  let inputs = map (words . takeWhile (/= '|')) (lines contents)
+  let signalPatterns = map (words . takeWhile (/= '|')) (lines contents)
   let outputs = map (words . filter (/= '|') . dropWhile (/= '|')) (lines contents)
 
   print $ day8a outputs
-  print $ day8b inputs outputs
+  print $ day8b signalPatterns outputs

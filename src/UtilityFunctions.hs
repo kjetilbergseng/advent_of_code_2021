@@ -25,4 +25,6 @@ rotate = drop <> take
 
 replace n val li = take n li <> [val] <> drop (n + 1) li
 
+replace2d i j val li = take i li <> [replace j val (li !! i)] <> drop (i + 1) li
+
 transformElement n fn li = take n li <> [fn (li !! n)] <> drop (n + 1) li
