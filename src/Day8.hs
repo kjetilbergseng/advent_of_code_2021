@@ -37,7 +37,7 @@ toNumber signalPattern output = toDecimal $ map (toDigit signalPattern) output
 
 toDecimal li = sum $ zipWith (\x y -> 10 ^ x * y) [0 .. length li] (reverse li)
 
-day8a outputs = length $ filter (\x -> x == 2 || x == 3 || x == 4 || x == 7) $ map length (join outputs)
+day8a outputs = length $ map length (join outputs) `intersect` [2,3,4,7]
 
 day8b signalPatterns outputs = sum $ zipWith toNumber signalPatterns outputs
 

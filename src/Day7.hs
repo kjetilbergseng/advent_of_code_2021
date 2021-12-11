@@ -3,7 +3,7 @@ module Day7 where
 import Data.Sort
 import UtilityFunctions
 
-median input = sort input !! div (length input + 1) 2
+median input = sort input !! div (length input) 2
 
 shiftedAverage i input = i + div (sum input) (length input)
 
