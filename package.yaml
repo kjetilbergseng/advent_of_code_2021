@@ -24,6 +24,7 @@ dependencies:
 - containers
 - lens
 - sort
+- matrix >=0.5
 
 library:
   source-dirs: src

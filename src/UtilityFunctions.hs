@@ -21,6 +21,8 @@ readInt x = read x :: Int
 
 readInteger x = read x :: Integer
 
+readCharToInt x = read [x] :: Int
+
 rotate = drop <> take
 
 replace n val li = take n li <> [val] <> drop (n + 1) li
