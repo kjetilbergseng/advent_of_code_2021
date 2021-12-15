@@ -1,5 +1,6 @@
 module UtilityFunctions where
-import Debug.Trace ( trace )
+
+import Debug.Trace (trace)
 
 splitIntoBlocksOf n ls
   | n <= 0 || null ls = []
@@ -33,3 +34,9 @@ replace2d i j val li = take i li <> [replace j val (li !! i)] <> drop (i + 1) li
 transformElement n fn li = take n li <> [fn (li !! n)] <> drop (n + 1) li
 
 debug = flip trace
+
+toPair li = (head li, li !! 1)
+
+ap2 (a, b) l = (a l, b l) -- ap2 (length, sum) l
+
+apl fa a = fmap ($a) fa -- apl [length, sum] l

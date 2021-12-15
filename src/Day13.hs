@@ -3,7 +3,7 @@ module Day13 where
 import qualified Data.Bifunctor
 import Data.List (nub)
 import Data.Matrix (setElem, transpose, zero)
-import UtilityFunctions (readInt, split)
+import UtilityFunctions (readInt, split, toPair)
 
 foldElementY pos (x, y)
   | y < pos = (x, y)
@@ -16,8 +16,6 @@ foldElementX pos (x, y)
 foldAt li (direction, pos)
   | direction == "x" = nub $ map (foldElementX pos) (filter (\(x, y) -> y /= pos) li)
   | otherwise = nub $ map (foldElementY pos) (filter (\(x, y) -> y /= pos) li)
-
-toPair li = (head li, li !! 1)
 
 reduceMatrix coords m = transpose $ foldl (\m (x, y) -> setElem 1 (x + 1, y + 1) m) m coords
 
