@@ -22,7 +22,7 @@ performSteps step steps keys rules mapOut
   | step == steps = mapOut
   | otherwise = performSteps (step + 1) steps keys rules (update keys rules mapOut Map.empty)
 
-getSum hashMap keys template = (-) <$> maximum <*> minimum $ [getVal key sumMap | key <- Map.keys sumMap]
+solve hashMap keys template = (-) <$> maximum <*> minimum $ [getVal key sumMap | key <- Map.keys sumMap]
   where
     startMap = Map.insertWith (+) [last template] 1 Map.empty
     sumMap = foldl (\m k -> Map.insertWith (+) (take 1 k) (getVal k hashMap) m) startMap keys
@@ -37,5 +37,5 @@ day14 = do
   let ruleMap = Map.fromList (zip keys rules)
   let startMap = addToMap template 1 Map.empty
 
-  print $ getSum (performSteps 0 10 keys ruleMap startMap) keys template
-  print $ getSum (performSteps 0 40 keys ruleMap startMap) keys template
+  print $ solve (performSteps 0 10 keys ruleMap startMap) keys template
+  print $ solve (performSteps 0 40 keys ruleMap startMap) keys template
