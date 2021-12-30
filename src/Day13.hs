@@ -2,7 +2,7 @@ module Day13 where
 
 import qualified Data.Bifunctor
 import Data.List (nub)
-import Data.Matrix (setElem, transpose, zero)
+import qualified Data.Matrix as Matrix
 import UtilityFunctions (readInt, split, toPair)
 
 foldElementY pos (x, y)
@@ -17,7 +17,7 @@ foldAt li (direction, pos)
   | direction == "x" = nub $ map (foldElementX pos) (filter (\(x, y) -> y /= pos) li)
   | otherwise = nub $ map (foldElementY pos) (filter (\(x, y) -> y /= pos) li)
 
-reduceMatrix coords m = transpose $ foldl (\m (x, y) -> setElem 1 (x + 1, y + 1) m) m coords
+reduceMatrix coords m = Matrix.transpose $ foldl (\m (x, y) -> Matrix.setElem 1 (x + 1, y + 1) m) m coords
 
 foldAll = foldl (\li (x, y) -> foldAt li (x, y))
 
@@ -26,7 +26,7 @@ day13a input fold = length $ foldAt input fold
 day13b input folds = reduceMatrix coords mat
   where
     coords = foldAll input folds
-    mat = zero (1 + maximum (map fst coords)) (1 + maximum (map snd coords))
+    mat = Matrix.zero (1 + maximum (map fst coords)) (1 + maximum (map snd coords))
 
 day13 = do
   putStrLn "day13"

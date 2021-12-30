@@ -4,3 +4,12 @@
 2021-12-12 16:13:14.192253900000 [$pid(ThreadId 5)] ERROR APP - user error (<getModule> loaded module can not find from path. <c:\repos\advent_of_code_2021\app\Main.hs> [("Day1","C:\\repos\\advent_of_code_2021\\src\\Day1.hs"),("Day12","C:\\repos\\advent_of_code_2021\\src\\Day12.hs"),("Day2","C:\\repos\\advent_of_code_2021\\src\\Day2.hs"),("Main","C:/repos/advent_of_code_2021/test/Spec.hs"),("UtilityFunctions","C:\\repos\\advent_of_code_2021\\src\\UtilityFunctions.hs")])
 2021-12-12 16:13:14.244254700000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
 2021-12-12 16:15:35.911224000000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2021-12-15 17:59:38.702798700000 [$pid(ThreadId 5)] ERROR APP - user error (<getModule> loaded module can not find from path. <c:\repos\advent_of_code_2021\src\Day15.hs> [("Day1","C:\\repos\\advent_of_code_2021\\src\\Day1.hs"),("Day12","C:\\repos\\advent_of_code_2021\\src\\Day12.hs"),("Day2","C:\\repos\\advent_of_code_2021\\src\\Day2.hs"),("Main","C:/repos/advent_of_code_2021/test/Spec.hs"),("UtilityFunctions","C:\\repos\\advent_of_code_2021\\src\\UtilityFunctions.hs")])
+2021-12-15 17:59:38.737797200000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2021-12-15 18:01:34.812416800000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2021-12-15 18:01:37.078993400000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2021-12-15 18:01:47.233306500000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2021-12-15 18:03:05.980352700000 [$pid(ThreadId 5)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2021-12-15 22:38:11.203323100000 [$pid(ThreadId 5)] ERROR APP - user error (variable id:10 not found.)
+2021-12-15 22:38:30.338764600000 [$pid(ThreadId 5)] ERROR APP - user error (variable id:15 not found.)
+2021-12-15 22:38:31.213191000000 [$pid(ThreadId 5)] ERROR APP - user error (variable id:14 not found.)

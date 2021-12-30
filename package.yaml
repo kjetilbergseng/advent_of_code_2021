@@ -25,7 +25,9 @@ dependencies:
 - lens
 - sort
 - matrix
+- vector
 - extra
+
 library:
   source-dirs: src
 

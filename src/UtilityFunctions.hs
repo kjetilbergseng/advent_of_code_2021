@@ -27,13 +27,15 @@ readCharToInt x = read [x] :: Int
 
 rotate = drop <> take
 
-replace n val li = take n li <> [val] <> drop (n + 1) li
+replace n val li = do take n li <> [val] <> drop (n + 1) li
 
-replace2d i j val li = take i li <> [replace j val (li !! i)] <> drop (i + 1) li
+replace2d i j val li = do take i li <> [replace j val (li !! i)] <> drop (i + 1) li
 
-transformElement n fn li = take n li <> [fn (li !! n)] <> drop (n + 1) li
+getElement i j li = (li!!j)!!i
 
-debug = flip trace
+transformElement n fn li = do take n li <> [fn (li !! n)] <> drop (n + 1) li
+transformElement2d i j fn li = do take i li <> [transformElement j fn (li !! i)] <> drop (i + 1) li
+(#) = flip trace
 
 toPair li = (head li, li !! 1)
 
